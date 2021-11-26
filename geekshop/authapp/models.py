@@ -2,17 +2,17 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.exceptions import ValidationError
 # Create your models here.
-def NoSymbolsInName(value):
-    """
-    Валидатор проверяет имя и фамилию на отсутствие символов.
-    """
-    def match(text):
-        symbols=set('"~!@#$%^&*()+`";:<>/\|')
-        for i in text:
-            if i in symbols: return False
-        return True
-    if match(value):
-        raise ValidationError('Введены недопустимые символы!' % value)
+# def NoSymbolsInName(value):
+#     """
+#     Валидатор проверяет имя и фамилию на отсутствие символов.
+#     """
+#     def match(text):
+#         symbols=set('"~!@#$%^&*()+`";:<>/\|')
+#         for i in text:
+#             if i in symbols: return False
+#         return True
+#     if match(value):
+#         raise ValidationError('Введены недопустимые символы!' % value)
 
 
 
@@ -22,8 +22,8 @@ def NoSymbolsInName(value):
 class User(AbstractUser):
     image=models.ImageField(upload_to='users_image', blank=True)
     age=models.PositiveIntegerField(default=18)
-    first_name = models.CharField(max_length=25, validators=[NoSymbolsInName])  # Это нужно удалить
-    last_name = models.CharField(max_length=25, validators=[NoSymbolsInName])  # Это тоже нужно удалить
+    # first_name = models.CharField(max_length=25, validators=[NoSymbolsInName])  # Это нужно удалить
+    # last_name = models.CharField(max_length=25, validators=[NoSymbolsInName])  # Это тоже нужно удалить
 
 
 
