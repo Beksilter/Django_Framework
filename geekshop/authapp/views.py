@@ -52,24 +52,18 @@ def register(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Данные успешно сохранены!')
-        else:
-            messages.error(request, form.errors)
-
-    baskets = Basket.objects.filter(user=request.user)
-
-    total_sum = sum(basket.sum() for basket in baskets)
-    total_quantity=sum(basket.quantity for basket in baskets)
-
+       form = UserProfileForm(instance=request.user,data=request.POST,files=request.FILES)
+       if form.is_valid():
+           messages.set_level(request, messages.SUCCESS)
+           messages.success(request, 'Вы успешно сохранили профайл')
+           form.save()
+       else:
+           messages.set_level(request, messages.ERROR)
+           messages.error(request,form.errors)
     context = {
-    'title': 'Geekshop | Профайл ',
-    'form': UserProfileForm(instance=request.user),
-    'baskets': Basket.objects.filter(user=request.user),
-    'total_quantity': total_quantity,
-    'total_sum': total_sum,
+        'title': 'Geekshop | Профайл',
+        'form' : UserProfileForm(instance=request.user),
+        'baskets': Basket.objects.filter(user=request.user),
     }
     return render(request, 'authapp/profile.html', context)
 
