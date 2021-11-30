@@ -38,8 +38,8 @@ def register(request):
             form.save()
             messages.success(request, 'Вы успешно зарегистрировались')
             return HttpResponseRedirect(reverse('authapp:login'))
-        # else:
-        #     print(form.errors)
+        else:
+            messages.error(request, form.errors)
     else:
         form = UserRegisterForm()
     context = {
@@ -57,11 +57,19 @@ def profile(request):
             form.save()
             messages.success(request, 'Данные успешно сохранены!')
         else:
-            form = UserProfileForm(instance=request.user)
+            messages.error(request, form.errors)
+
+    baskets = Basket.objects.filter(user=request.user)
+
+    total_sum = sum(basket.sum() for basket in baskets)
+    total_quantity=sum(basket.quantity for basket in baskets)
+
     context = {
-        'title': 'Geekshop | Профайл ',
-        'form': UserProfileForm(instance=request.user),
-        'baskets': Basket.objects.filter(user=request.user),
+    'title': 'Geekshop | Профайл ',
+    'form': UserProfileForm(instance=request.user),
+    'baskets': Basket.objects.filter(user=request.user),
+    'total_quantity': total_quantity,
+    'total_sum': total_sum,
     }
     return render(request, 'authapp/profile.html', context)
 
