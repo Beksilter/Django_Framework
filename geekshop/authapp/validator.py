@@ -17,7 +17,7 @@ def validate_name(value):
         )
 
 def age_validator(value):
-    if value is None:
+    if value is '' or value<0:
         raise ValidationError(
             _(f"Введите ваш возраст"),
             params={'value': value},

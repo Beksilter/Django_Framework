@@ -38,8 +38,8 @@ def register(request):
             form.save()
             messages.success(request, 'Вы успешно зарегистрировались')
             return HttpResponseRedirect(reverse('authapp:login'))
-        # else:
-        #     print(form.errors)
+        else:
+            messages.error(request, form.errors)
     else:
         form = UserRegisterForm()
     context = {
@@ -52,15 +52,17 @@ def register(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Данные успешно сохранены!')
-        else:
-            form = UserProfileForm(instance=request.user)
+       form = UserProfileForm(instance=request.user,data=request.POST,files=request.FILES)
+       if form.is_valid():
+           messages.set_level(request, messages.SUCCESS)
+           messages.success(request, 'Вы успешно сохранили профайл')
+           form.save()
+       else:
+           messages.set_level(request, messages.ERROR)
+           messages.error(request,form.errors)
     context = {
-        'title': 'Geekshop | Профайл ',
-        'form': UserProfileForm(instance=request.user),
+        'title': 'Geekshop | Профайл',
+        'form' : UserProfileForm(instance=request.user),
         'baskets': Basket.objects.filter(user=request.user),
     }
     return render(request, 'authapp/profile.html', context)
