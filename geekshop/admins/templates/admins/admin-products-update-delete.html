@@ -1,0 +1,57 @@
+{% extends 'admins/base.html' %}
+
+
+{% block content %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">Изменение категории | {{ selected_product.name }}</h1>
+                <div class="card-body">
+                    <form action="{% url 'admins:admin_products_update' selected_product.id %}" method="POST"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <table width="100%" cellspacing="0">
+                            <tbody>
+                            <tr>
+                                <td>Название</td>
+                                <td>{{ form.name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Изображение</td>
+                                <td>{{ form.image }}</td>
+                            </tr>
+                            <tr>
+                                <td>Описание</td>
+                                <td>{{ form.description }}</td>
+                            </tr>
+                            <tr>
+                                <td>Категория</td>
+                                <td>{{ form.category }}</td>
+                            </tr>
+                            <tr>
+                                <td>Цена</td>
+                                <td>{{ form.price }}</td>
+                            </tr>
+                            <tr>
+                                <td>Количество</td>
+                                <td>{{ form.quantity }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-row">
+                            <div class="col-lg-12" style="margin-top: 33px;">
+                                <input class="btn btn-info btn-block" type="submit" value="Сохранить">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-lg-12" style="margin-top: 33px;">
+                            <a class="btn btn-danger btn-block"
+                               href="{% url 'admins:admin_products_delete' selected_product.id %}">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}
