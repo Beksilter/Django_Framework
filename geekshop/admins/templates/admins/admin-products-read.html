@@ -64,8 +64,7 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{% url 'admins:admin_products_update' product.id %}"
-                                                  method="post">
+                                            <form action="{% url 'admins:admin_products_update' pk=product.id %}">
                                                 {% csrf_token %}
                                                 <input class="btn btn-success btn-block" type="submit" value="Изменить">
                                             </form>
