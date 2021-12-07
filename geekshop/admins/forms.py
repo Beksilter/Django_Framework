@@ -57,6 +57,8 @@ class CategoryUpdateFormAdmin(forms.ModelForm):
 
 
 
+
+
 class AdminsProductElementForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
     description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
