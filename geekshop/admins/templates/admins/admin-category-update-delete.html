@@ -1,43 +1,50 @@
 {% extends 'admins/base.html' %}
 
+
 {% block content %}
+
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Изменение категории | {{ selected_category.name }}</h1>
+                <h1 class="mt-4">Редактирование категории | {{ productcategory.name }}  </h1>
                 <div class="card-body">
-                    <form action="{% url 'admins:admin_categorys_update' selected_category.id %}" method="POST">
+                    <form action="{% url 'admins:admin_category_update' productcategory.id %}" method="post">
+
                         {% csrf_token %}
                         <div class="form-row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="small mb-1">Имя</label>
+                                    <label class="small mb-1" for="{{ form.name.id_for_label }}">Наименование</label>
                                     {{ form.name }}
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="small mb-1">Фамилия</label>
+                                    <label class="small mb-1" for="{{ form.description.id_for_label }}">Описание</label>
                                     {{ form.description }}
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="form-row">
-                            <div class="col-lg-12" style="margin-top: 33px;">
+                            <div class="col-lg-6" style="margin-top: 33px;">
                                 <input class="btn btn-info btn-block" type="submit" value="Сохранить">
                             </div>
                         </div>
-                    </form>
-                    <div class="row">
-                        <div class="col-lg-12" style="margin-top: 33px;">
-                            <a class="btn btn-danger btn-block"
-                               href="{% url 'admins:admin_categorys_delete' selected_category.id %}">Удалить</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; GeekShop 2021</div>
+                </div>
+            </div>
+        </footer>
     </div>
+
 {% endblock %}

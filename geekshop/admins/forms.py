@@ -43,6 +43,19 @@ class AdminsCategoryElementForm(forms.ModelForm):
         model = ProductCategory
         fields = ('name', 'description')
 
+class CategoryUpdateFormAdmin(forms.ModelForm):
+    class Meta:
+        model = ProductCategory
+        # exclude =()
+        fields = ('name', 'description')
+
+    def __init__(self, *args, **kwargs):
+        super(CategoryUpdateFormAdmin, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control py-4'
+
+
+
 
 class AdminsProductElementForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
@@ -54,3 +67,5 @@ class AdminsProductElementForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ('name','description','image','price','quantity','category')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
