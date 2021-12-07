@@ -1,0 +1,63 @@
+{% extends 'admins/base_template.html'%}
+{% load static %}
+
+{% block content%}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Редактирование пользователя | {{selected_user.username}}</h1>
+        <div class="card-body">
+            <form action="{% url 'admins:admin_users_update' selected_user.id%}" method="POST" >
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="small mb-1">Имя</label>
+                            {{form.first_name}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="small mb-1">Фамилия</label>
+                            {{form.last_name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row mb-2">
+                    <div class="col-lg-12">
+                        <div class="custom-file">
+                            {{form.image}}
+                            <label class="custom-file-label">Выберите изображение</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-6">
+                        <label class="small mb-1">Имя пользователя</label>
+                        {{form.username}}
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="small mb-1">Адрес электронной
+                            почты</label>
+                        {{form.email}}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-12" style="margin-top: 33px;">
+                        <input class="btn btn-info btn-block" type="submit" value="Сохранить">
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-lg-12" style="margin-top: 33px;">
+                        {% if selected_user.is_active%}
+                            <a class="btn btn-danger btn-block" href = "{% url 'admins:admin_users_delete' selected_user.id %}" >Деактивировать</a>
+                        {% else %}
+                            <a class="btn btn-danger btn-block" href = "{% url 'admins:admin_users_delete' selected_user.id %}" >Активировать</a>
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{%endblock%}
+

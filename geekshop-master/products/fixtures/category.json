@@ -1,0 +1,50 @@
+[
+  {
+    "model": "products.productscategory",
+    "pk": 1,
+    "fields": {
+      "name": "Мужская одежда",
+      "description": "Одежда для мужчин"
+    }
+  },
+  {
+    "model": "products.productscategory",
+    "pk": 2,
+    "fields": {
+      "name": "Женская одежда",
+      "description": "Одежда для женщин"
+    }
+  },
+  {
+    "model": "products.productscategory",
+    "pk": 3,
+    "fields": {
+      "name": "Одежда унисекс",
+      "description": null
+    }
+  },
+  {
+    "model": "products.productscategory",
+    "pk": 4,
+    "fields": {
+      "name": "Обувь",
+      "description": ""
+    }
+  },
+  {
+    "model": "products.productscategory",
+    "pk": 5,
+    "fields": {
+      "name": "Аксессуары",
+      "description": ""
+    }
+  },
+  {
+    "model": "products.productscategory",
+    "pk": 6,
+    "fields": {
+      "name": "Подарки",
+      "description": ""
+    }
+  }
+]
