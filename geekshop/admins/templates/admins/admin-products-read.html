@@ -44,9 +44,9 @@
                                     <tr>
                                         <td>{{ product.name }}</td>
                                         <td>{{ product.description }}</td>
-                                         <td>{{ product.category }}</td>
-                                         <td>{{ product.price }}</td>
-                                         <td>{{ product.quantity }}</td>
+                                        <td>{{ product.category }}</td>
+                                        <td>{{ product.price }}</td>
+                                        <td>{{ product.quantity }}</td>
 
                                         <td class="text-center">
                                             {% if product.is_active %}
@@ -57,17 +57,17 @@
                                             {% endif %}
                                         </td>
                                         <td>
-                                            <form action="{% url 'admins:admin_products_delete' product.id %}"
+                                            <form action="{% url 'admins:admins_product_delete' product.id %}"
                                                   method="post">
                                                 {% csrf_token %}
                                                 <input class="btn btn-danger btn-block" type="submit" value="Удалить">
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{% url 'admins:admin_products_update' pk=product.id %}">
-                                                {% csrf_token %}
-                                                <input class="btn btn-success btn-block" type="submit" value="Изменить">
-                                            </form>
+
+                                            <a href="{% url 'admins:admins_product_update' product.id %}">
+                                                 <input class="btn btn-success btn-block" type="submit" value="Изменить">
+                                            </a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="{% url 'admins:admin_products_create' %}">
+                        <a href="{% url 'admins:admins_product_create' %}">
                             <button class="btn btn-success">Создать продукт</button>
                         </a>
                     </div>

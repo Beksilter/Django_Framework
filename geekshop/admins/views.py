@@ -3,11 +3,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from django.urls import reverse
+
 from django.views.generic import TemplateView
 
-from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, AdminsCategoryElementForm, \
-    AdminsProductElementForm, CategoryUpdateFormAdmin
+from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, CategoryUpdateFormAdmin, ProductsForm, ProductUpdate
 from authapp.models import User
 from mainapp.mixin import BaseClassContextMixin, CustomDispatchMixin
 from mainapp.models import ProductCategory, Product
@@ -108,8 +107,8 @@ class ProductsListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
 class ProductsCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
     template_name = 'admins/admin-products-create.html'
-    form_class = AdminsProductElementForm
-    success_url = reverse_lazy('admins:admin_product')
+    form_class = ProductsForm
+    success_url = reverse_lazy('admins:admins_product')
     title = 'Админка | Создание товаров'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -121,22 +120,19 @@ class ProductsCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin)
 class ProductsUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
     template_name = 'admins/admin-products-update-delete.html'
-    form_class = AdminsProductElementForm
+    form_class = ProductUpdate
     title = 'Админка | Обновления товаров'
-    success_url = reverse_lazy('admins:admin_product')
+    success_url = reverse_lazy('admins:admins_product')
 
 
 
 class ProductsDeleteView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
     model = Product
-    template_name = 'admins/admin-products-update-delete.html'
-    success_url = reverse_lazy('admins:admin_product')
+    template_name = 'admins/admin-products-read.html'
+    success_url = reverse_lazy('admins:admins_product')
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        if self.object.is_active:
-            self.object.is_active = False
-        else:
-            self.object.is_active = True
+        self.object.is_active = False if self.object.is_active else True
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())

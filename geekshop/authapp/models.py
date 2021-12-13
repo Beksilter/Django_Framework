@@ -1,32 +1,22 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.exceptions import ValidationError
+from datetime import timedelta
+
 # Create your models here.
-# def NoSymbolsInName(value):
-#     """
-#     Валидатор проверяет имя и фамилию на отсутствие символов.
-#     """
-#     def match(text):
-#         symbols=set('"~!@#$%^&*()+`";:<>/\|')
-#         for i in text:
-#             if i in symbols: return False
-#         return True
-#     if match(value):
-#         raise ValidationError('Введены недопустимые символы!' % value)
-
-
-
-
-
+from django.utils.timezone import now
 
 class User(AbstractUser):
-    image=models.ImageField(upload_to='users_image', blank=True)
-    age=models.PositiveIntegerField(default=18)
-    # first_name = models.CharField(max_length=25, validators=[NoSymbolsInName])  # Это нужно удалить
-    # last_name = models.CharField(max_length=25, validators=[NoSymbolsInName])  # Это тоже нужно удалить
+    image = models.ImageField(upload_to='users_image', blank=True)
+    age = models.PositiveIntegerField(default=18)
 
+    activation_key = models.CharField(max_length=128, blank=True)
+    activation_key_expires = models.DateTimeField(auto_now=True, blank=True, null=True)
 
-
+    def is_activation_key_expires(self):
+        if now () <= self.activation_key_expires + timedelta(hours=48):
+            return False
+        return True
 
 
 # def validate_password_strength(value):
