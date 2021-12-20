@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 from mainapp.views import index, products
 from django.views.i18n import set_language
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
@@ -29,6 +30,7 @@ urlpatterns = [
     path('baskets/', include('baskets.urls', namespace='baskets')),
     path('admins/', include('admins.urls', namespace='admins')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
+    path('', include('social_django.urls', namespace='social')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
