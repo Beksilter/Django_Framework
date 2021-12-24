@@ -31,6 +31,7 @@ urlpatterns = [
     path('admins/', include('admins.urls', namespace='admins')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     path('', include('social_django.urls', namespace='social')),
+    path('orders/', include('ordersapp.urls', namespace='orders')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
