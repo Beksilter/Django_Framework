@@ -17,5 +17,6 @@ class Product(models.Model):
     quantity = models.PositiveIntegerField(default=0)
     category= models.ForeignKey(ProductCategory,on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
+
     def __str__(self):
         return f'{self.name} | {self.category}'

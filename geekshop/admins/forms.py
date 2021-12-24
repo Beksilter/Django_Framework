@@ -4,6 +4,7 @@ from authapp.forms import UserRegisterForm, UserProfileForm
 from authapp.models import User
 from mainapp.models import ProductCategory, Product
 
+
 class UserAdminRegisterForm(UserRegisterForm):
     image = forms.ImageField(widget=forms.FileInput(), required=False)
 
@@ -33,15 +34,14 @@ class UserAdminProfileForm(UserProfileForm):
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
 
 
-
-
-
 class AdminsCategoryElementForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
     description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+
     class Meta:
         model = ProductCategory
         fields = ('name', 'description')
+
 
 class CategoryUpdateFormAdmin(forms.ModelForm):
     class Meta:
@@ -55,17 +55,38 @@ class CategoryUpdateFormAdmin(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control py-4'
 
 
-
-
-class AdminsProductElementForm(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
-    description = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
-    image = forms.ImageField(widget=forms.FileInput(), required=False)
-    price = forms.DecimalField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
-    quantity = forms.DecimalField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+class ProductsForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=ProductCategory.objects.all())
+    image = forms.ImageField(widget=forms.FileInput)
 
     class Meta:
         model = Product
-        fields = ('name','description','image','price','quantity','category')
+        fields = ['name', 'description', 'price', 'quantity', 'category', 'image']
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name == 'category':
+                field.widget.attrs['class'] = 'form-control'
+            else:
+                field.widget.attrs['class'] = 'form-control py-4'
+        self.fields['image'].widget.attrs['class'] = 'custom-file-input'
+
+
+class ProductUpdate(ProductsForm):
+    category = forms.ModelChoiceField(queryset=ProductCategory.objects.all().select_related(),
+                                      empty_label=None)
+    image = forms.ImageField(widget=forms.FileInput, required=False)
+
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'price', 'quantity', 'category', 'image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field_name == 'category':
+                field.widget.attrs['class'] = 'form-control'
+            else:
+                field.widget.attrs['class'] = 'form-control py-4'
+        self.fields['image'].widget.attrs['class'] = 'custom-file-input'

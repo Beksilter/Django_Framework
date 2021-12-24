@@ -18,10 +18,10 @@ urlpatterns = [
     path('category-delete/<int:pk>/', CategoryDeleteView.as_view(), name='admin_category_delete'),
     path('category-update/<int:pk>/', CategoryUpdateView.as_view(), name='admin_category_update'),
     # управление товарами
-    path('product/', ProductsListView.as_view(), name='admin_product'),
-    path('products-create/', ProductsCreateView.as_view(), name='admin_products_create'),
-    path('products-update/<int:pk>/', ProductsUpdateView.as_view(), name='admin_products_update'),
-    path('products-delete/<int:pk>/', ProductsDeleteView.as_view(), name='admin_products_delete'),
+    path('product/', ProductsListView.as_view(), name='admins_product'),
+    path('products-update/<int:pk>/', ProductsUpdateView.as_view(), name='admins_product_update'),
+    path('products-create/', ProductsCreateView.as_view(), name='admins_product_create'),
+    path('products-delete/<int:pk>/', ProductsDeleteView.as_view(), name='admins_product_delete'),
 
 
 ]
