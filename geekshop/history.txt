@@ -1,0 +1,80 @@
+    1  exit
+    2  ssh-keygen
+    3  ls
+    4  rm cat
+    5  ls
+    6  rm cat.pub
+    7  ssh-keygen
+    8  cat /root/.shh
+    9  ls
+   10  cat  /root/.ssh/id_rsa.pub
+   11  apt update
+   12  apt install nginx
+   13  apt install postgresql postgresql-contrib
+   14  apt install python3-venv
+   15  apt install git
+   16  nano /etc/postgresql/12/main/pg_hba.conf
+   17  systemctl restart postgresql
+   18  systemctl status postgresql
+   19  useradd -g www-data -m django
+   20  ls
+   21  cd /home/django
+   22  git clone git@github.com:Beksilter/Django_Framework.git
+   23  ls
+   24  python3 -m venv env
+   25  source env/bin/activate
+   26  git branch
+   27  cd Django_Framework/geekshop/
+   28  git branch
+   29  git checkout part2_5
+   30  ls
+   31  source ../../env/bin/activate
+   32  pip install -r requirements.txt
+   33  pip install wheel
+   34  pip install -r requirements.txt
+   35  psql -U postgres
+   36  python3 manage.py migrate
+   37  python3 manage.py fill_db
+   38  python3 manage.py createsuperuser
+   39  python3 runserver 0.0.0.0:8000
+   40  python3 manage.py runserver 0.0.0.0:8000
+   41  nano /etc/systemd/system/gunicorn.service
+   42  pip install gunicorn
+   43  nano /etc/systemd/system/gunicorn.service
+   44  systemctl enable gunicorn
+   45  systemctl status gunicorn
+   46  chown -R django /home/django
+   47  systemctl restart gunicorn
+   48  systemctl status gunicorn
+   49  sudo nano /etc/nginx/sites-available/geekshop
+   50  nano /etc/systemd/system/gunicorn.service
+   51  systemctl disable gunicorn
+   52  systemctl enable gunicorn
+   53  systemctl start gunicorn
+   54  systemctl status gunicorn
+   55  ls
+   56  cd /home/django/Django_Framework/geekshop/
+   57  ls
+   58  rm geekshop.sock
+   59  ls
+   60  systemctl restart gunicorn
+   61  ls
+   62  cd geekshop/
+   63  ls
+   64  nano /etc/systemd/system/gunicorn.service
+   65  sudo nano /etc/nginx/sites-available/geekshop
+   66  sudo ln -s /etc/nginx/sites-available/geekshop /etc/nginx/sites-enabled/
+   67  rm /etc/nginx/sites-enabled/default
+   68  systemctl restart gunicorn
+   69  systemctl status gunicorn
+   70  sudo nginx -t
+   71  systemctl restart gunicorn
+   72  systemctl restart nginx
+   73  systemctl status nginx
+   74  python3 manage.py runserver 0.0.0.0:8000
+   75  python3 runserver 0.0.0.0:8000
+   76  cd
+   77  history > /tmp/history.txt
+   78  history
+   79  tail -f /var/log/nginx/error.log
+   80  history

@@ -12,6 +12,7 @@ from django.views.generic import FormView, UpdateView
 
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm, UserProfileEditForm
 from authapp.models import User
+from baskets.models import Basket
 from mainapp.mixin import BaseClassContextMixin, UserDispatchMixin
 
 class LoginListView(LoginView,BaseClassContextMixin):
