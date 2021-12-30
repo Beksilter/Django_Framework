@@ -87,13 +87,21 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3_old',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3_old',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'geekshop',
+        'USER': 'postgres',
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -158,10 +166,10 @@ LOGIN_ERROR_URL = '/'
 # EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 # EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 # EMAIL_USE_SSL = True if os.getenv('EMAIL_USE_SSL') == 'True' else False
-
+#
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # EMAIL_FILE_PATH = 'tmp/emails/'
-
+#
 # EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
 
 # В командную строку запустить

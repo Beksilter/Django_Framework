@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.contrib import auth, messages
-
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
@@ -10,7 +9,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView, UpdateView
 
-from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm, UserProfileEditForm
+from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm,UserProfileEditForm
 from authapp.models import User
 from mainapp.mixin import BaseClassContextMixin, UserDispatchMixin
 
@@ -93,12 +92,6 @@ class ProfileFormView(UpdateView,BaseClassContextMixin,UserDispatchMixin):
         context = super(ProfileFormView, self).get_context_data(**kwargs)
         context['profile'] = UserProfileEditForm(instance=self.request.user.userprofile)
         return context
-
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(ProfileFormView, self).get_context_data(**kwargs)
-    #     context['baskets'] = Basket.objects.filter(user=self.request.user)
-    #     return context
 
 class Logout(LogoutView):
     template_name = "mainapp/index.html"
