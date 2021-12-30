@@ -114,6 +114,7 @@ window.onload = function () {
         console.log(orderitem_num)
         console.log(orderitem_product_pk)
 
+
         if (orderitem_product_pk) {
             $.ajax({
                 url: '/orders/product/' + orderitem_product_pk + '/price/',
