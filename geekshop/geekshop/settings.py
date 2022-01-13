@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3_old',
 #     }
 # }
-#
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -231,3 +231,16 @@ if DEBUG:
         'debug_toolbar.panels.profiling.ProfilingPanel',
         'template_profiler_panel.panels.template.TemplateProfilerPanel',
     ]
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 120
+CACHE_MIDDLEWARE_KEY_PREFIX = 'geekbrains'
+
+CACHES = {
+    'default':{
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '194.58.104.203:11211'
+    }
+}
+
+LOW_CACHE = True
