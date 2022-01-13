@@ -61,6 +61,7 @@ MIDDLEWARE = [
 
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'geekshop.urls'
@@ -237,7 +238,7 @@ CACHE_MIDDLEWARE_SECONDS = 120
 CACHE_MIDDLEWARE_KEY_PREFIX = 'geekbrains'
 
 CACHES = {
-    'default':{
+    'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '194.58.104.203:11211'
     }
