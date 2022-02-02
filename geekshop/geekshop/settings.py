@@ -172,7 +172,7 @@ LOGIN_ERROR_URL = '/'
 # mail
 
 
-DOMAIN_NAME = 'http://localhost:8000'
+DOMAIN_NAME = 'http://194.58.104.203'
 EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = '84dbd5d5ca48f0'
 EMAIL_HOST_PASSWORD = 'e1f72125f7a9de'
