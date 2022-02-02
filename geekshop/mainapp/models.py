@@ -5,6 +5,7 @@ class ProductCategory(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True,null=True)
     is_active = models.BooleanField(default=True,db_index=True)
+    discount = models.DecimalField(max_digits=2, decimal_places=0,default=0)
 
     def __str__(self):
         return f'{self.name}'

@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-
+    <meta name="interkassa-verification" content="ab5066cbac3827e71c7cfbd32bc91e7b" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -99,7 +99,13 @@
 
 <!-- FontAwesome script -->
 <script src="{% static  'vendor/fontawesome/fontawesome-icons.js' %}" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+   <script>
+        {% for msg in messages %}
+        swal('{{ msg }}');
+        {% endfor %}
+    </script>
 </body>
 
 </html>
