@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 from django.utils.functional import cached_property
 
+
 from authapp.models import User
 from mainapp.models import Product
 

@@ -155,7 +155,16 @@ window.onload = function () {
                 url: "/baskets/add/" + t_href + "/",
                 success: function (data) {
                     $('.card_add_basket').html(data.result)
-                    alert('товар добавлен вы корзину')
+                    swal({
+                        title: 'Товар добавлен в корзину',
+                        text: 'Redirecting...',
+                        icon: 'success',
+                        timer: 700,
+                        buttons: false,
+                    })
+                        .then(() => {
+                            dispatch(redirect('/'));
+                        })
                 },
             });
         event.preventDefault()

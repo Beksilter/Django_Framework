@@ -4,9 +4,14 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.template.loader import render_to_string
+from django.views.decorators.cache import never_cache
 
 from baskets.models import Basket
 from mainapp.models import Product
+from django.db import connection
+from django.dispatch import receiver
+from django.db.models.signals import pre_save
+from django.db.models import F
 
 
 # @login_required
@@ -30,8 +35,12 @@ def basket_add(request, id):
         baskets = Basket.objects.filter(user=user_select, product=product)
         if baskets:
             basket = baskets.first()
-            basket.quantity += 1
+            # basket.quantity += 1
+            basket.quantity = F('quantity')+1
             basket.save()
+
+            update_queries = list(filter(lambda x: 'UPDATE' in x['sql'],connection.queries))
+            print(f'basket_add {update_queries}')
         else:
             Basket.objects.create(user=user_select, product=product, quantity=1)
         products = Product.objects.all()
